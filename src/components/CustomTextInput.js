@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import colors from '../themes/Colors';
+import {formatDate} from '../utils/formatDate';
 
 export default function CustomTextInput({
   imageSource,
@@ -16,6 +17,7 @@ export default function CustomTextInput({
   style,
   label,
   onPressIcon,
+  isDate,
   ...rest
 }) {
   return (
@@ -34,7 +36,9 @@ export default function CustomTextInput({
             style={styles.textInput}
           />
         ) : (
-          <Text>{value}</Text>
+          <Text style={styles.date}>
+            {value && formatDate(value?.toString())}
+          </Text>
         )}
       </View>
     </TouchableOpacity>
@@ -67,5 +71,10 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
     fontWeight: '600',
     marginBottom: 5,
+  },
+  date: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: colors.black,
   },
 });
